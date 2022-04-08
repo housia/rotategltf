@@ -1,0 +1,11 @@
+#video-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 12;
+    color: rgb(238, 232, 230);
+    font-weight: bold;
+    font-size: 1.5rem;
+    text-align: center;
+  }

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Aframe Transparent Video Shader</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+  </head>
+    <link rel="stylesheet" href="index.css">
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/super-hands/dist/super-hands.min.js"></script>
+    <script src="https://unpkg.com/aframe-transparent-video-shader@1.0.3/dist/aframe-transparent-video-shader.umd.js"></script>
+    <script src="./index.js"></script>
+   
+  </head>  
+  <body>
+    <a-scene>
+      <a-assets>
+        <video id="soccerPlayerVideo" src="GLOW800_FL800_comparison_YouTube_1_06.mp4" unmuted loop="true"></video>
+      </a-assets>
+      <a-scene>
+        <a-assets>
+          <!-- <a-mixin id="planet" geometry="primitive: sphere; radius: 0.5"></a-mixin> -->
+      <!-- <a-mixin id="orbit" attribute="rotation" to="0 360 0" repeat="indefinite" easing="linear" dur="3000"></a-mixin> -->
+          <!-- <a-mixin id="spin" attribute="rotation" to="0 360 0" repeat="indefinite" easing="linear" dur="96000"></a-mixin> --> --> -->
+          <img id="sun" src="sun.jpg">
+        </a-assets>
+        <!-- <a-scene background="color: black"></a-scene> -->
+      
+   
+      <a-entity
+        id="soccerPlayer"
+        material="shader: transparent-video; src: #soccerPlayerVideo"
+        geometry="primitive: sphere;
+                  width: 3;
+                  height: -1.0"
+        position="0 1 -2">
+      </a-entity>
+    <a-scene>
+      <a-assets>
+        <video id="soccerPlayerVideo" src="GLOW800_FL800_comparison_YouTube_1_06.mp4" unmuted loop="true"></video>
+      </a-assets>
+      
+      <a-assets>
+        <video id="soccerPlayerVideo" src="GLOW800_FL800_comparison_YouTube_1_06.mp4" unmuted loop="true"></video>
+      </a-assets>
+      
+      <a-entity
+        id="soccerPlayer"
+        material="shader: transparent-video; src: #soccerPlayerVideo"
+        geometry="primitive: sphere;
+                  width: 1;
+                  height: -1.8"
+        position="0 1 -2">
+      </a-entity>
+
+      <a-entity
+        id="soccerPlayer"
+        material="shader: transparent-video; src: #soccerPlayerVideo"
+        geometry="primitive: sphere;
+                  width: 1;
+                  height: -1.8"
+        position="3 1 -2">
+      </a-entity>
+      <!-- <a-sky color="#6EBAA7"></a-sky> -->
+      <a-assets>
+        <video id="soccerPlayerVideo" src="GLOW800_FL800_comparison_YouTube_1_06.mp4" unmuted loop="true"></video>
+      </a-assets>
+      
+      <a-entity
+        id="soccerPlayer"  
+        material="shader: transparent-video; src: #soccerPlayerVideo"
+        geometry="primitive: plane;
+                  width: 3;
+                  height: 1.8"
+        position="-3 1 -2">
+      </a-entity>
+      <a-scene>
+       
+        <a-assets>
+         
+          <a-asset-item  id="tree" src="MOnkey_2.gltf"></a-asset-item></a-asset-item>
+        </a-assets>
+        <!-- <a-gltf-model src="https://cdn.glitch.com/9c6c4af9-c44f-49f8-8dc4-e776f4752e18%2Fhubs.glb?1544164501088" position="-9 0 -3" rotation="0 0 0" scale="9 1 1" ></a-gltf-model> -->
+        <a-gltf-model id="scene" position="-9 0 -3" rotation="0 100 0" src="j\assets"></a-gltf-model>
+        <a-entity gltf-model="leica final 3.gltf" scale="01 01 01"   position="-8 1 -2" rotation="0 0 0"
+        drag-rotate-component></a-entity>
+        <!-- <a-entity gltf-model="MOnkey_2.gltf" scale="0.8 0.7 0.7"  position="-9 0 -2" rotation="0 100 0"
+        drag-rotate-component></a-entity> -->
+        
+     <a-entity rotation="360" position="0 0 5">
+       
+      
+     
+       <a-camera user-height="0 0 0" look-controls>
+        <!-- <a-entity cursor raycaster="far: 00; interval: 0; objects: .clickable"
+                      position="0 0 0"
+                    geometry="primitive: ring; radiusInner: 0.00; radiusOuter: 0.00"
+                    material="color: blue; shader: flat"  ></a-entity> -->     </a-camera>     
+        <a-entity id="player" collider-check>
+          <a-entity raycaster="objects: .collidable" position="0 -0.9 0" rotation="90 0 0"></a-entity>
+        </a-entity>
+        <!-- <a-entity class="collidable" geometry="primitive: box" position="1 0 0"></a-entity> -->
+        <a-entity cursor raycaster="far: 20; interval: 1000; objects: .clickable"></a-entity>
+
+   <!-- <a-camera position="0 0 0" look-controls="enabled:true"> 
+        <a-cursor></a-cursor> 
+      </a-camera>   -->
+     
+      
+    </a-scene>
+ 
+      </a-entity>
+      <script type="text/javascript">
+        
+      AFRAME.registerComponent('collider-check', {
+  dependencies: ['raycaster'],
+
+  init: function () {
+    this.el.addEventListener('raycaster-intersection', function () {
+      console.log('Player hit something!');
+    });
+  }
+});
+    
+
+        AFRAME.registerComponent('drag-rotate-component',{
+          schema : { speed : {default:1}},
+          init : function(){
+            this.ifMouseDown = false;
+            this.x_cord = 1;
+            this.y_cord = 1;
+            document.addEventListener('mousedown',this.OnDocumentMouseDown.bind(this));
+            document.addEventListener('mouseup',this.OnDocumentMouseUp.bind(this));
+            document.addEventListener('mousemove',this.OnDocumentMouseMove.bind(this));
+          },
+          OnDocumentMouseDown : function(event){
+            this.ifMouseDown = false;
+            this.x_cord = event.clientX;
+            this.y_cord = event.clientY;
+          },
+          OnDocumentMouseUp : function(){
+            this.ifMouseDown = true;
+          },
+          OnDocumentMouseMove : function(event)
+          {
+            if(this.ifMouseDown)
+            {
+              var temp_x = event.clientX-this.x_cord;
+               var temp_y = event.clientY-this.x_cord;
+              // if(Math.abs(temp_y)<Math.abs(temp_x))
+              // {
+              //   this.el.object3D.rotateY(temp_x*this.data.speed/400);
+              // }
+              if(Math.abs(temp_y)<Math.abs(temp_x))
+              {
+                this.el.object3D.rotateY(temp_x*this.data.speed/450);
+              }
+              //  this.x_cord = event.clientX;
+              this.y_cord = event.clientY;
+            }
+          }
+        });
+    
+       
+      </script>
+    </a-scene>
+    
+    <!-- <div id="video-message">
+      Click to start playing the video.
+    </div> -->
+   
+  </body>
+</html>
